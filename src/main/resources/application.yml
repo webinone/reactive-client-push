@@ -1,0 +1,23 @@
+spring:
+  profiles:
+    active: localhost # 기본 환경 선택
+  application:
+    name: client-push-server
+  main:
+    allow-bean-definition-overriding: true
+  jpa.properties.hibernate.jdbc.time_zone: UTC
+  jackson.time-zone: UTC
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: false
+    freemarker:
+      cache: false
+
+server:
+  port: 8888 # 추후 서버 포트 확정시 수정
