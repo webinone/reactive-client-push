@@ -3,7 +3,13 @@ spring:
     host: localhost
     port: 6001
     password: zooredis
-
+  r2dbc:
+    url: r2dbc:pool:postgres://localhost:5432/zoo
+    username: zoo
+    password: zoo
+#  spring.r2dbc.url=r2dbc:pool:mssql://$AZ_DATABASE_NAME.database.windows.net:1433/demo
+#  spring.r2dbc.username=spring@$AZ_DATABASE_NAME
+#  spring.r2dbc.password=$AZ_SQL_SERVER_PASSWORD
 ## 추후 redis cluster 설정 지원
 #  redis:
 #    cluster:

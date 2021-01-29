@@ -21,12 +21,15 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
+    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.springframework.kafka:spring-kafka'
 
     implementation "io.projectreactor.kafka:reactor-kafka:1.2.2.RELEASE"
 
-    // https://mvnrepository.com/artifact/io.vavr/vavr
+    implementation('io.r2dbc:r2dbc-postgresql')
+//    runtime 'org.postgresql:postgresql'
+
     compile group: 'io.vavr', name: 'vavr', version: '0.10.3'
 
     compileOnly 'org.projectlombok:lombok'
