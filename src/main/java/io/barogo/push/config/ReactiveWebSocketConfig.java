@@ -17,7 +17,7 @@ import org.springframework.web.reactive.socket.server.support.WebSocketHandlerAd
 import org.springframework.web.reactive.socket.server.upgrade.ReactorNettyRequestUpgradeStrategy;
 
 @Configuration
-public class WebSocketConfig {
+public class ReactiveWebSocketConfig {
 
   @Autowired
   EchoSocketHandler echoSocketHandler;
