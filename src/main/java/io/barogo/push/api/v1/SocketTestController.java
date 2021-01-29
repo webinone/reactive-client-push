@@ -48,12 +48,6 @@ public class SocketTestController {
   public Flux<WorkerLocation> r2dbcAll(
   ) {
     return workerLocationService.readWorkerLocations();
-//    return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
-//        .body(workerLocationService.readWorkerLocations(), WorkerLocation.class);
-
-//    return this.workerLocationService.readWorkerLocations()
-//        .flatMap(v -> ServerResponse.ok().body(BodyInserters.fromObject(v)))
-//        .switchIfEmpty(ServerResponse.notFound().build());
   }
 
 }

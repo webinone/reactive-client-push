@@ -12,21 +12,12 @@ import org.springframework.r2dbc.connection.init.ResourceDatabasePopulator;
 @EnableR2dbcRepositories(basePackages = "io.barogo.push.repository")
 public class R2DBCConfig {
 
-//  @Bean
-//  public PostgresqlConnectionFactory connectionFactory() {
-//    return new PostgresqlConnectionFactory(
-//        PostgresqlConnectionConfiguration.builder()
-//            .host("localhost")
-//            .database("zoo")
-//            .username("zoo")
-//            .password("zoo").build());
-//  }
-
   @Bean
   public ConnectionFactoryInitializer initializer(ConnectionFactory connectionFactory) {
     ConnectionFactoryInitializer initializer = new ConnectionFactoryInitializer();
     initializer.setConnectionFactory(connectionFactory);
-    ResourceDatabasePopulator populator = new ResourceDatabasePopulator(new ClassPathResource("schema.sql"));
+    ResourceDatabasePopulator populator = new ResourceDatabasePopulator(new ClassPathResource(
+        "database/schema.sql"));
     initializer.setDatabasePopulator(populator);
     return initializer;
   }
