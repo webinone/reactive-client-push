@@ -21,3 +21,17 @@ spring:
 
 server:
   port: 8888 # 추후 서버 포트 확정시 수정
+
+oauth:
+  resource:
+    jwt:
+      key-value:
+        -----BEGIN PUBLIC KEY-----
+        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApK89od+5FUvfebfGgqfw
+        zMZLjq3uoG74CaiE8AEe+6Yaimv8Pmf0u9G80oBNi7oRFu5PXJGnIVt3wMjceTVN
+        gBiKwuFRUUTgV0wGATbf63s68Fr6HhFH21/BPd/KjeiWs1X/Ou3/cPLpzvojMB+a
+        XbAyzeKLxHNWIf0kuSCQhU3FVerJU0MlZ3QpITUZkD5kleoTCd39ruhb+iXm/9Yr
+        7XJ7dMpPqWaMNGPxgu12jKUesRQks1oqS00Xe/HoK/f2MyJ6d1wgiEp8QRKiTv7z
+        tPKdqjq/Gcm86Id07ytQn90JRkGG6OqvK72+fZiUTn2mSVDs5GZW55sy6Vo/Jk2D
+        OwIDAQAB
+        -----END PUBLIC KEY-----

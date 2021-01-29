@@ -49,7 +49,8 @@ public class ReactiveWebSocketConfig {
 
   @Bean
   public WebSocketService webSocketService() {
-    return new HandshakeWebSocketService(new ReactorNettyRequestUpgradeStrategy());
+//    return new HandshakeWebSocketService(new ReactorNettyRequestUpgradeStrategy());
+    return new CustomHandshakeWebSocketService(new ReactorNettyRequestUpgradeStrategy());
   }
 
 }
