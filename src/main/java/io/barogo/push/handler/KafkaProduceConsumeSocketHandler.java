@@ -7,25 +7,31 @@ import io.barogo.push.service.KafkaService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.socket.WebSocketHandler;
-import org.springframework.web.reactive.socket.WebSocketMessage;
 import org.springframework.web.reactive.socket.WebSocketSession;
 import reactor.core.publisher.Mono;
 
 @Slf4j
 @Component
-public class KafkaListenerSocketHandler implements WebSocketHandler {
+public class KafkaProduceConsumeSocketHandler implements WebSocketHandler {
 
   private static final ObjectMapper json = new ObjectMapper();
 
   private final KafkaService kafkaService;
 
-  public KafkaListenerSocketHandler(KafkaService kafkaService) {
+  public KafkaProduceConsumeSocketHandler(KafkaService kafkaService) {
     this.kafkaService = kafkaService;
   }
 
   @Override
-  public Mono<Void> handle(WebSocketSession webSocketSession) {
-    return webSocketSession.send(kafkaService.getTestTopicFlux()
+  public Mono<Void> handle(WebSocketSession session) {
+
+    session
+        .receive()
+        .map(webSocketMessage -> webSocketMessage.getPayloadAsText())
+        .doOnNext(echoMessage -> kafkaService.sendKafka("test", echoMessage).subscribe())
+        .subscribe();
+
+    return session.send(kafkaService.getTestTopicFlux()
         .map(record -> {
           KafkaMessage message = new KafkaMessage("[Test] Add message", record.value());
 
@@ -35,8 +41,6 @@ public class KafkaListenerSocketHandler implements WebSocketHandler {
             return "Error while serializing to JSON";
           }
         })
-        .map(webSocketSession::textMessage))
-                .and(webSocketSession.receive()
-        .map(WebSocketMessage::getPayloadAsText));
+        .map(session::textMessage));
   }
 }

@@ -1,7 +1,7 @@
 package io.barogo.push.config;
 
 import io.barogo.push.handler.EchoSocketHandler;
-import io.barogo.push.handler.KafkaListenerSocketHandler;
+import io.barogo.push.handler.KafkaProduceConsumeSocketHandler;
 import io.barogo.push.handler.RedisPushSubSocketHandler;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +23,7 @@ public class ReactiveWebSocketConfig {
   EchoSocketHandler echoSocketHandler;
 
   @Autowired
-  KafkaListenerSocketHandler kafkaSocketHandler;
+  KafkaProduceConsumeSocketHandler kafkaSocketHandler;
 
   @Autowired
   RedisPushSubSocketHandler redisPushSubSocketHandler;

@@ -27,6 +27,7 @@ public class RedisPushSubSocketHandler implements WebSocketHandler {
 
   @Override
   public Mono<Void> handle(WebSocketSession webSocketSession) {
+
     return webSocketSession.send(redisPubSubService.getTestTopicFlux()
         .map(record ->
             "Redis push receive, " + record

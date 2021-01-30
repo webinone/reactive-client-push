@@ -36,7 +36,6 @@ public class EchoSocketHandler implements WebSocketHandler {
         .receive()
         .map(webSocketMessage -> webSocketMessage.getPayloadAsText())
         .map(echoMessage -> echoService.greeting(echoMessage))
-//        .doOnNext(echoMessage -> echoService.saveRedis(echoMessage).subscribe())
         .doOnNext(echoMessage -> echoPublisher.push(echoMessage))
         .subscribe();
 
