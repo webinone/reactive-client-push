@@ -1,7 +1,8 @@
 package io.barogo.push.config;
 
 import io.barogo.push.handler.EchoSocketHandler;
-import io.barogo.push.handler.KafkaSocketHandler;
+import io.barogo.push.handler.KafkaListenerSocketHandler;
+import io.barogo.push.handler.RedisPushSubSocketHandler;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import org.springframework.web.reactive.HandlerMapping;
 import org.springframework.web.reactive.handler.SimpleUrlHandlerMapping;
 import org.springframework.web.reactive.socket.WebSocketHandler;
 import org.springframework.web.reactive.socket.server.WebSocketService;
-import org.springframework.web.reactive.socket.server.support.HandshakeWebSocketService;
 import org.springframework.web.reactive.socket.server.support.WebSocketHandlerAdapter;
 import org.springframework.web.reactive.socket.server.upgrade.ReactorNettyRequestUpgradeStrategy;
 
@@ -23,13 +23,17 @@ public class ReactiveWebSocketConfig {
   EchoSocketHandler echoSocketHandler;
 
   @Autowired
-  KafkaSocketHandler kafkaSocketHandler;
+  KafkaListenerSocketHandler kafkaSocketHandler;
+
+  @Autowired
+  RedisPushSubSocketHandler redisPushSubSocketHandler;
 
   @Bean
   public HandlerMapping handlerMapping() {
     Map<String, WebSocketHandler> map = new HashMap<>();
     map.put("/echo", echoSocketHandler);
     map.put("/kafka", kafkaSocketHandler);
+    map.put("/redispubsub", redisPushSubSocketHandler);
 //    map.put("/chat", new ChatSocketHandler(messagePublisher, messages));
 //    int order = -1; // before annotated controllers
 

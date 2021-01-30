@@ -7,6 +7,8 @@ import org.springframework.data.redis.connection.ReactiveRedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.ReactiveRedisTemplate;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.listener.ChannelTopic;
+import org.springframework.data.redis.listener.ReactiveRedisMessageListenerContainer;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
@@ -14,6 +16,20 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
 public class ReactiveRedisConfig {
+
+  @Bean
+  ChannelTopic topic() {
+    return new ChannelTopic("barogo:queue");
+  }
+
+  @Bean
+  ReactiveRedisMessageListenerContainer container(ReactiveRedisConnectionFactory factory) {
+
+    ReactiveRedisMessageListenerContainer container = new ReactiveRedisMessageListenerContainer(factory);
+    container.receive(topic());
+
+    return container;
+  }
 
   @Bean
   @Primary

@@ -36,22 +36,7 @@ public class EchoSocketHandler implements WebSocketHandler {
         .receive()
         .map(webSocketMessage -> webSocketMessage.getPayloadAsText())
         .map(echoMessage -> echoService.greeting(echoMessage))
-        .doOnNext(echoMessage -> echoService.saveRedis(echoMessage).subscribe())
-//        .doOnNext(
-//
-//            echoService.getTestTopicFlux()
-//            .map(
-//                record -> {
-//                  EchoMessage echoMessage = EchoMessage.builder().id("kafka")
-//                      .body("[KAFKA] : " + record)
-//                      .sendAt(111111L).build();
-//
-//                }
-//
-//            )
-//
-//
-//        )
+//        .doOnNext(echoMessage -> echoService.saveRedis(echoMessage).subscribe())
         .doOnNext(echoMessage -> echoPublisher.push(echoMessage))
         .subscribe();
 

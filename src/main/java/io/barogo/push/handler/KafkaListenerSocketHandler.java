@@ -13,13 +13,13 @@ import reactor.core.publisher.Mono;
 
 @Slf4j
 @Component
-public class KafkaSocketHandler implements WebSocketHandler {
+public class KafkaListenerSocketHandler implements WebSocketHandler {
 
   private static final ObjectMapper json = new ObjectMapper();
 
   private final KafkaService kafkaService;
 
-  public KafkaSocketHandler(KafkaService kafkaService) {
+  public KafkaListenerSocketHandler(KafkaService kafkaService) {
     this.kafkaService = kafkaService;
   }
 
