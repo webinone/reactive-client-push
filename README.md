@@ -34,7 +34,7 @@ zoo project의 client push 역할을 담당한다.
 * client-api
 * open-api
 
-## Project 패키지  구성
+## Project 패키지 구성
 
 ```sh
 ├─client-push
