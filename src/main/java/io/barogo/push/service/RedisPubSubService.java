@@ -1,18 +1,16 @@
 package io.barogo.push.service;
 
 import java.io.IOException;
-import java.util.Collections;
 import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.connection.ReactiveSubscription;
+import org.springframework.data.redis.core.ReactiveRedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.data.redis.listener.ReactiveRedisMessageListenerContainer;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
-import reactor.kafka.receiver.KafkaReceiver;
-import reactor.kafka.receiver.ReceiverOptions;
-import reactor.kafka.receiver.ReceiverRecord;
+import reactor.core.publisher.Mono;
 
 @Slf4j
 @Service
@@ -20,6 +18,7 @@ import reactor.kafka.receiver.ReceiverRecord;
 public class RedisPubSubService {
 
   private final ReactiveRedisMessageListenerContainer reactiveMsgListenerContainer;
+  private final ReactiveRedisTemplate<String, String> reactiveRedisTemplate;
   private final ChannelTopic topic;
 
   private Flux<String> topicStream;
@@ -31,6 +30,11 @@ public class RedisPubSubService {
     log.info(">>>>>>>>>>> topic name : " + topic.getTopic());
 
     topicStream = createTopicCache(reactiveMsgListenerContainer, topic);
+  }
+
+  public Mono<Long> postRedisPub(String message) {
+    log.info("New pub message '" + message + "' send to Channel '" + topic.getTopic() + "'.");
+    return reactiveRedisTemplate.convertAndSend(topic.getTopic(), message);
   }
 
   public Flux<String> getTestTopicFlux() {

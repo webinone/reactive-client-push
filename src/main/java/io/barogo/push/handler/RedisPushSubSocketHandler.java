@@ -26,14 +26,20 @@ public class RedisPushSubSocketHandler implements WebSocketHandler {
   private final RedisPubSubService redisPubSubService;
 
   @Override
-  public Mono<Void> handle(WebSocketSession webSocketSession) {
+  public Mono<Void> handle(WebSocketSession session) {
 
-    return webSocketSession.send(redisPubSubService.getTestTopicFlux()
+    session
+        .receive()
+        .map(webSocketMessage -> webSocketMessage.getPayloadAsText())
+        .doOnNext(message -> redisPubSubService.postRedisPub(message).subscribe())
+        .subscribe();
+
+    return session.send(redisPubSubService.getTestTopicFlux()
         .map(record ->
             "Redis push receive, " + record
         )
-        .map(webSocketSession::textMessage))
-        .and(webSocketSession.receive()
-            .map(WebSocketMessage::getPayloadAsText));
+        .map(session::textMessage));
+//        .and(session.receive()
+//            .map(WebSocketMessage::getPayloadAsText));
   }
 }

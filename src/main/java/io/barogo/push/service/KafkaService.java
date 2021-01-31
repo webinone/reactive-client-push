@@ -67,7 +67,6 @@ public class KafkaService {
         .addRevokeListener(partitions -> log.info("onPartitionsRevoked {}", partitions));
 
 //    return KafkaReceiver.create(options).receive();
-//    return KafkaReceiver.create(options).receive().cache();
     return KafkaReceiver.create(options).receive().cache();
   }
 }
