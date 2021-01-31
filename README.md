@@ -78,7 +78,20 @@ zoo-zookeeper          /bin/sh -c /usr/sbin/sshd  ...   Up      0.0.0.0:2181->21
 
 ```
 
-## Running Client Push
+## Running Client Push Server
+
+### Running
+```bash
+./gradlew build
+./gradlew bootRun 
+```
+
+### Websocket Test
+
+Websocket client tool 설치
+- [설치파일 Download](https://chrome.google.com/webstore/detail/websocket-king-client/cbcbkhdmedgianpaifchdaddpnmgnknn)
+
+
 
 
 ## 배포 CI/CD
