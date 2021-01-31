@@ -33,7 +33,7 @@ public class ReactiveWebSocketConfig {
     Map<String, WebSocketHandler> map = new HashMap<>();
     map.put("/echo", echoSocketHandler);
     map.put("/kafka", kafkaSocketHandler);
-    map.put("/redispubsub", redisPushSubSocketHandler);
+    map.put("/redis", redisPushSubSocketHandler);
 //    map.put("/chat", new ChatSocketHandler(messagePublisher, messages));
 //    int order = -1; // before annotated controllers
 

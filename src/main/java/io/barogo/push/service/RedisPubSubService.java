@@ -27,7 +27,7 @@ public class RedisPubSubService {
   @PostConstruct
   public void init() throws IOException {    // Consumer를 열어놓음
 
-    log.info(">>>>>>>>>>> redis topic 열림 !!!!");
+    log.info(">>>>>>>>>>> redis topic Init !!!!");
     log.info(">>>>>>>>>>> topic name : " + topic.getTopic());
 
     topicStream = createTopicCache(reactiveMsgListenerContainer, topic);

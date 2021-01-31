@@ -31,13 +31,6 @@ public class RedisPushSubSocketHandler implements WebSocketHandler {
     return webSocketSession.send(redisPubSubService.getTestTopicFlux()
         .map(record ->
             "Redis push receive, " + record
-//          KafkaMessage message = new KafkaMessage("[Test] Add message", record.value());
-//
-//          try {
-//            return json.writeValueAsString(message);
-//          } catch (JsonProcessingException e) {
-//            return "Error while serializing to JSON";
-//          }
         )
         .map(webSocketSession::textMessage))
         .and(webSocketSession.receive()

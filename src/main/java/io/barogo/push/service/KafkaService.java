@@ -5,6 +5,7 @@ import java.util.Collections;
 import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.consumer.ConsumerPartitionAssignor.Subscription;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -57,10 +58,16 @@ public class KafkaService {
   }
 
   private <T, G> Flux<ReceiverRecord<T, G>> createTopicCache(ReceiverOptions<T, G> receiverOptions, String topicName) {
-    ReceiverOptions<T, G> options = receiverOptions.subscription(Collections.singleton(topicName));
+
     log.info(">>>>>>>> kafka topic consume topicName : {}", topicName);
     log.info(">>>>>>>> kafka topic consume groupID : {}", receiverOptions.groupId());
+
+    ReceiverOptions<T, G> options = receiverOptions.subscription(Collections.singleton(topicName))
+        .addAssignListener(partitions -> log.info("onPartitionsAssigned {}", partitions))
+        .addRevokeListener(partitions -> log.info("onPartitionsRevoked {}", partitions));
+
 //    return KafkaReceiver.create(options).receive();
+//    return KafkaReceiver.create(options).receive().cache();
     return KafkaReceiver.create(options).receive().cache();
   }
 }
