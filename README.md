@@ -44,6 +44,9 @@ zoo project의 client push 역할을 담당한다.
    ├─docker
    │    docker-compose.yml  (redis, kafka local에 구성)
    │
+   ├─http (webflux api test file)
+   │ Demo.http
+   │
    ├─src/main/java
    │   │  ClientPushApplication
    │   ├─ io/bargo/push (허브컨트롤룸)
@@ -64,8 +67,12 @@ zoo project의 client push 역할을 담당한다.
    │   │   ├─ repository
    │   │   └─ service
    │   │    
-   │   └─src/main/resources  
-   │
+   │   └─src/main/resources
+   │       │ 
+   │       ├─ database (r2dbc schema generate)
+   │       │   └─ schema.sql
+   │       └─ appliation.yml
+   │      
    └─src/test/main       
        │    
        └─src/test/resources  
@@ -110,6 +117,7 @@ zoo-zookeeper          /bin/sh -c /usr/sbin/sshd  ...   Up      0.0.0.0:2181->21
 
 #### Websocket Demo endpoint
 
+#### Websocket
 
 ![img.png](img.png)
 
@@ -129,6 +137,22 @@ ws://localhost:9999/redis?token={{ACCESS_TOKEN}}
 - kafka demo
 ```bash
 ws://localhost:9999/kafka?token={{ACCESS_TOKEN}}
+```
+
+#### Http end point
+
+```bash
+### redis 저장
+POST http://localhost:9999/api/v1/demo/redis-save/hello
+
+### redis pub
+POST http://localhost:9999/api/v1/demo/redis-pub/hello
+
+### kafka pub
+POST http://localhost:9999/api/v1/demo/kafka-pub/hello
+
+### r2dbc select all
+GET http://localhost:9999/api/v1/demo/r2dbc-all
 ```
 
 ## 배포 CI/CD
