@@ -110,24 +110,22 @@ zoo-zookeeper          /bin/sh -c /usr/sbin/sshd  ...   Up      0.0.0.0:2181->21
 
 #### Websocket Demo endpoint
 
-> 현재 port는 8888로써 추후 수정 예정
+> 현재 port는 9999 로써 추후 수정 예정
 
 - echo demo
 ```bash
-ws://localhost:8888/echo?token={{ACCESS_TOKEN}}
+ws://localhost:9999/echo?token={{ACCESS_TOKEN}}
 ```
 
 - redis demo
 ```bash
-ws://localhost:8888/redis?token={{ACCESS_TOKEN}}
+ws://localhost:9999/redis?token={{ACCESS_TOKEN}}
 ```
 
 - kafka demo
 ```bash
-ws://localhost:8888/kafka?token={{ACCESS_TOKEN}}
+ws://localhost:9999/kafka?token={{ACCESS_TOKEN}}
 ```
-
-
 
 ## 배포 CI/CD
 
