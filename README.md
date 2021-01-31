@@ -25,63 +25,36 @@ zoo project의 client push 역할을 담당한다.
 ```sh
 ├─client-push
    │  README.md
+   │  DockerFile
+   │  build.gradle
    ├─docker
    │    docker-compose.yml  (redis, kafka local에 구성)
    │
    ├─src/main/java
-   │   │  README.md
-   │   ├─hub (허브컨트롤룸)
-   │   └─hq (hq컨트롤룸)
-   └─server (zoo server project)
-       │  README.md
-       │  build.gradle
-       │  JenkinsFile
-       ├─autocall-server
-       │     README.md
-       │     build.gradle
-       │     Dockerfile
-       ├─client-api
-       │     README.md
-       │     build.gradle
-       │     Dockerfile
-       ├─core-api
-       │     README.md
-       ├─open-api
-       │     README.md
-       │     build.gradle
-       │     Dockerfile
-       ├─data-server
-       │     README.md
-       │     build.gradle
-       │     Dockerfile
-       └─oauth-server
-            README.md
-            build.gradle
-            Dockerfile
-            
-            
-   src\
-   ..main\java
-		 ... \io
-			.... \barogo
-				..... \{project}
-					..... \api -> controller 패키지
-						...... \advice -> controller advice 패키지
-          ..... \common -> 공통 utils등의 모듈등이 속해 있는 패키지
-          ..... \config -> spring config 설정 패키지
-          ..... \exception -> exception 패키지
-					..... \model -> dto, vo, entity(domain) 패키지
-						...... \dto -> dto 패키지
-						...... \entity -> jpa entity 패키지
-						...... \vo -> vo 패키지
-					..... \service -> service 패키지
-          ..... \persistence (dao)
-						...... \mapper -> mybatis mapper 패키지
-						...... \repository -> jpa repository 패키지
-
-     ...\resources
-   ..test\java
-     ...\resources
+   │   │  ClientPushApplication
+   │   ├─ io/bargo/push (허브컨트롤룸)
+   │   │   │
+   │   │   ├─ api (webflux controller)
+   │   │   │  
+   │   │   ├─ common (공통모듈)
+   │   │   │
+   │   │   ├─ config (프로젝트 설정 정보)
+   │   │   │
+   │   │   ├─ handler (websocket handler)
+   │   │   │
+   │   │   ├─ model 
+   │   │   │  └─ dto
+   │   │   │  └─ entity (r2dbc entity)
+   │   │   │
+   │   │   ├─ publisher (global publisher)
+   │   │   ├─ repository
+   │   │   └─ service
+   │   │    
+   │   └─src/main/resources  
+   │
+   └─src/test/main       
+       │    
+       └─src/test/resources  
 ```
 
 ### Setup
