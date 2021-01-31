@@ -93,7 +93,7 @@ zoo-kafka              start-kafka.sh                   Up      0.0.0.0:9092->90
 zoo-redis-standalone   docker-entrypoint.sh redis ...   Up      0.0.0.0:6001->6001/tcp, 6379/tcp                  
 zoo-zookeeper          /bin/sh -c /usr/sbin/sshd  ...   Up      0.0.0.0:2181->2181/tcp, 22/tcp, 2888/tcp, 3888/tcp
 
-```
+```bash
 
 ## Running Client Push Server
 
@@ -105,9 +105,24 @@ zoo-zookeeper          /bin/sh -c /usr/sbin/sshd  ...   Up      0.0.0.0:2181->21
 
 ### Websocket Test
 
-Websocket client tool 설치
+#### Websocket client tool 설치
 - [설치파일 Download](https://chrome.google.com/webstore/detail/websocket-king-client/cbcbkhdmedgianpaifchdaddpnmgnknn)
 
+#### Websocket Demo endpoint
+- echo demo
+```bash
+ws://localhost:8888/echo?token={{ACCESS_TOKEN}}
+```
+
+- redis demo
+```bash
+ws://localhost:8888/redis?token={{ACCESS_TOKEN}}
+```
+
+- kafka demo
+```bash
+ws://localhost:8888/kafka?token={{ACCESS_TOKEN}}
+```
 
 
 
