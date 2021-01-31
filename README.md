@@ -57,6 +57,32 @@ zoo project의 client push 역할을 담당한다.
        └─src/test/resources  
 ```
 
-### Setup
+## Setup
+
+> docker-compose 부분은 추후, root docker-compse와 통합하여 관리예정 
+
+### docker-compose local setting (redis, kafka 설치)
+```bash
+docker-compose -f ./docker/docker-compose.yml up -d
+``` 
+option -d 일 경우 backgroud 실행 로그를 보고싶다면 -d 없이 실행
+
+### docker-compose run check
+```bash
+ docker-compose -f ./docker/docker-compose.yml  ps
+        Name                      Command               State                         Ports                       
+------------------------------------------------------------------------------------------------------------------
+zoo-kafka              start-kafka.sh                   Up      0.0.0.0:9092->9092/tcp                            
+zoo-redis-standalone   docker-entrypoint.sh redis ...   Up      0.0.0.0:6001->6001/tcp, 6379/tcp                  
+zoo-zookeeper          /bin/sh -c /usr/sbin/sshd  ...   Up      0.0.0.0:2181->2181/tcp, 22/tcp, 2888/tcp, 3888/tcp
+
+```
+
+## Running Client Push
+
+
+## 배포 CI/CD
+
+> 추후 설정 필요
 
 
