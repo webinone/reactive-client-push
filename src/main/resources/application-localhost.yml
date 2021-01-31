@@ -23,9 +23,3 @@ spring:
 #      max-redirects: 3
 #    password: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
-kafka:
-  host: localhost:9092
-  groupid: testWebSocketGroupId
-  topic:
-    test.websocket: zoo.queueing.push.barogo.test.websocket
-

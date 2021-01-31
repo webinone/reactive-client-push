@@ -14,6 +14,8 @@ spring:
       enabled: false
     freemarker:
       cache: false
+  kafka:
+    bootstrap-servers: localhost:9092
 
 server:
   port: 9999 # 추후 서버 포트 확정시 수정
@@ -31,3 +33,8 @@ oauth:
         tPKdqjq/Gcm86Id07ytQn90JRkGG6OqvK72+fZiUTn2mSVDs5GZW55sy6Vo/Jk2D
         OwIDAQAB
         -----END PUBLIC KEY-----
+
+kafka:
+  groupId: testWebSocketGroupId
+  topic:
+    test.websocket: zoo.queueing.push.barogo.test.websocket

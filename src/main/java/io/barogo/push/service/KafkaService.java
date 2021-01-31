@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.ReactiveRedisOperations;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -22,6 +23,10 @@ import reactor.kafka.sender.KafkaSender;
 public class KafkaService {
 
   private final ReactiveRedisOperations<String, String> reactiveRedisOperations;
+
+  @Value("${kafka.topic.test.websocket}")
+  private String testTopicName;
+
   @Qualifier("kafkaSender")
   private final KafkaSender<String, Object> kafkaSender;
   @Qualifier("receiverStringOptions")
@@ -32,8 +37,8 @@ public class KafkaService {
   @PostConstruct
   public void init() throws IOException {    // Consumer를 열어놓음
 
-    log.info(">>>>>>>>>>> kafka topic 열림 !!!!");
-    testTopicStream = createTopicCache(receiverOptions, "zoo.queueing.push.barogo.test.websocket");
+    log.info(">>>>>>>>>>> kafka topic consume init !!!!");
+    testTopicStream = createTopicCache(receiverOptions, testTopicName);
   }
 
   public Flux<ReceiverRecord<String, String>> getTestTopicFlux() {
@@ -41,11 +46,8 @@ public class KafkaService {
   }
 
   public Mono<Boolean> sendKafka(String key, Object value) {
-
-    String topic = "zoo.queueing.push.barogo.test.websocket";
-
     return kafkaSender.createOutbound()
-        .send(Mono.just(new ProducerRecord<>(topic, key, value)))  // 해당 topic으로 message 전송
+        .send(Mono.just(new ProducerRecord<>(testTopicName, key, value)))  // 해당 topic으로 message 전송
         .then()
         .map(ret -> true)
         .onErrorResume(e -> {
@@ -56,7 +58,9 @@ public class KafkaService {
 
   private <T, G> Flux<ReceiverRecord<T, G>> createTopicCache(ReceiverOptions<T, G> receiverOptions, String topicName) {
     ReceiverOptions<T, G> options = receiverOptions.subscription(Collections.singleton(topicName));
-    log.info(">>>>>>>> 여기 걸리냐??????????");
+    log.info(">>>>>>>> kafka topic consume topicName : {}", topicName);
+    log.info(">>>>>>>> kafka topic consume groupID : {}", receiverOptions.groupId());
+//    return KafkaReceiver.create(options).receive();
     return KafkaReceiver.create(options).receive().cache();
   }
 }
