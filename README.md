@@ -109,6 +109,9 @@ zoo-zookeeper          /bin/sh -c /usr/sbin/sshd  ...   Up      0.0.0.0:2181->21
 - [설치파일 Download](https://chrome.google.com/webstore/detail/websocket-king-client/cbcbkhdmedgianpaifchdaddpnmgnknn)
 
 #### Websocket Demo endpoint
+
+> 현재 port는 8888로써 추후 수정 예정
+
 - echo demo
 ```bash
 ws://localhost:8888/echo?token={{ACCESS_TOKEN}}
