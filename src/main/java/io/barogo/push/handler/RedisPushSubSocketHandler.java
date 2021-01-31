@@ -1,19 +1,12 @@
 package io.barogo.push.handler;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.barogo.push.model.dto.KafkaMessage;
-import io.barogo.push.publisher.EchoPublisher;
-import io.barogo.push.service.EchoService;
-import io.barogo.push.service.KafkaService;
 import io.barogo.push.service.RedisPubSubService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.socket.WebSocketHandler;
-import org.springframework.web.reactive.socket.WebSocketMessage;
 import org.springframework.web.reactive.socket.WebSocketSession;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Slf4j

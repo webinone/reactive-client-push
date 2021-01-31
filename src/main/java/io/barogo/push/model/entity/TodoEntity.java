@@ -3,15 +3,11 @@ package io.barogo.push.model.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table("worker_location")
-public class WorkerLocation {
+@Table("todo")
+public class TodoEntity {
 
   @Id
   private Long id;
 
-  private String longitude;
-
-  private String altitude;
-
-  private String address;
+  private String name;
 }

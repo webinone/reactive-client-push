@@ -1,9 +1,9 @@
 package io.barogo.push.api.v1;
 
-import io.barogo.push.model.entity.WorkerLocation;
+import io.barogo.push.model.entity.TodoEntity;
 import io.barogo.push.service.EchoService;
 import io.barogo.push.service.KafkaService;
-import io.barogo.push.service.WorkerLocationService;
+import io.barogo.push.service.TodoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.ReactiveRedisOperations;
@@ -26,36 +26,30 @@ public class SocketDemoController {
   private final ReactiveRedisOperations<String, String> reactiveRedisOperations;
   private final EchoService echoService;
   private final KafkaService kafkaService;
-  private final WorkerLocationService workerLocationService;
+  private final TodoService todoService;
   private final ReactiveRedisTemplate<String, String> reactiveRedisTemplate;
   private final ChannelTopic topic;
 
-  @GetMapping("/redis-test")
-  public Flux<Object> redisAll() {
-    return reactiveRedisOperations.keys("*")
-        .flatMap(reactiveRedisOperations.opsForValue()::get);
-  }
-
-  @PostMapping("/redis-test")
-  public Mono<String> postRedis() {
+  @PostMapping("/redis-save/{message}")
+  public Mono<String> postRedis(@PathVariable String message) {
     return echoService.saveRedis("test");
   }
 
-  @PostMapping("/redis-pub/{variety}")
-  public Mono<Long> postRedisPub(@PathVariable String variety) {
-    log.info("New Coffee with variety '" + variety + "' send to Channel '" + topic.getTopic() + "'.");
-    return reactiveRedisTemplate.convertAndSend(topic.getTopic(), variety);
+  @PostMapping("/redis-pub/{message}")
+  public Mono<Long> postRedisPub(@PathVariable String message) {
+    log.info("New Coffee with variety '" + message + "' send to Channel '" + topic.getTopic() + "'.");
+    return reactiveRedisTemplate.convertAndSend(topic.getTopic(), message);
   }
 
-  @PostMapping("/kafka-test")
-  public Mono<Boolean> postKafka() {
-    return kafkaService.sendKafka("key", "kafka controller value");
+  @PostMapping("/kafka-pub/{message}")
+  public Mono<Boolean> postKafka(@PathVariable String message) {
+    return kafkaService.sendKafka("key", message);
   }
 
-  @GetMapping("/r2dbc-test")
-  public Flux<WorkerLocation> r2dbcAll(
+  @GetMapping("/r2dbc-all")
+  public Flux<TodoEntity> r2dbcAll(
   ) {
-    return workerLocationService.readWorkerLocations();
+    return todoService.readWorkerLocations();
   }
 
 }

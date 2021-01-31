@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class KafkaMessage {
+public class KafkaMessageDto {
   private String type;
   private String message;
 }

@@ -13,7 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class EchoMessage {
+public class EchoMessageDto {
   private String id;
   private String body;
   private long sendAt ;

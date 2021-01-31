@@ -2,7 +2,7 @@ package io.barogo.push.handler;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.barogo.push.model.dto.KafkaMessage;
+import io.barogo.push.model.dto.KafkaMessageDto;
 import io.barogo.push.service.KafkaService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -33,7 +33,7 @@ public class KafkaProduceConsumeSocketHandler implements WebSocketHandler {
 
     return session.send(kafkaService.getTestTopicFlux()
         .map(record -> {
-          KafkaMessage message = new KafkaMessage("[Test] Add message", record.value());
+          KafkaMessageDto message = new KafkaMessageDto("[Test] Add message", record.value());
 
           try {
             return json.writeValueAsString(message);

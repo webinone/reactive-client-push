@@ -1,7 +1,7 @@
 package io.barogo.push.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.barogo.push.model.dto.EchoMessage;
+import io.barogo.push.model.dto.EchoMessageDto;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.UUID;
@@ -22,17 +22,17 @@ public class EchoService {
   public String greeting(String message)  {
 
     // business logic 처리...
-    EchoMessage echoMessage = null;
+    EchoMessageDto echoMessageDto = null;
     String returnMessage = null;
     try {
 
       String messageId = UUID.randomUUID().toString();
 
-      echoMessage = EchoMessage.builder()
+      echoMessageDto = EchoMessageDto.builder()
           .id(messageId)
           .body(message)
           .sendAt(LocalDateTime.now().atZone(ZoneOffset.UTC).toInstant().toEpochMilli()).build();
-      returnMessage = jsonMapper.writeValueAsString(echoMessage);
+      returnMessage = jsonMapper.writeValueAsString(echoMessageDto);
 
     }catch (Exception e) {
       log.error("Could not parse JSON object", e.toString());
