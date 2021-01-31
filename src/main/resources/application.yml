@@ -7,10 +7,6 @@ spring:
     allow-bean-definition-overriding: true
   jpa.properties.hibernate.jdbc.time_zone: UTC
   jackson.time-zone: UTC
-  cloud:
-    loadbalancer:
-      ribbon:
-        enabled: false
   devtools:
     livereload:
       enabled: true
@@ -20,7 +16,7 @@ spring:
       cache: false
 
 server:
-  port: 8888 # 추후 서버 포트 확정시 수정
+  port: 9999 # 추후 서버 포트 확정시 수정
 
 oauth:
   resource:
