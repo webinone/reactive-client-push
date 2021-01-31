@@ -1,6 +1,5 @@
 package io.barogo.push.handler;
 
-import io.barogo.push.model.dto.EchoMessage;
 import io.barogo.push.publisher.EchoPublisher;
 import io.barogo.push.service.EchoService;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +12,6 @@ import reactor.core.publisher.Mono;
 
 @Slf4j
 @Component
-//@AllArgsConstructor
 public class EchoSocketHandler implements WebSocketHandler {
 
   private final EchoService echoService;
