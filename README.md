@@ -39,9 +39,9 @@ zoo project의 client push 역할을 담당한다.
    │   │   ├─ common (공통모듈)
    │   │   │
    │   │   ├─ config (프로젝트 설정 정보)
-   │   │   │
+   │   │   │  kafka, redis, r2dbc config
    │   │   ├─ handler (websocket handler)
-   │   │   │
+   │   │   │  websocket 실제 구현 handler
    │   │   ├─ model 
    │   │   │  └─ dto
    │   │   │  └─ entity (r2dbc entity)
