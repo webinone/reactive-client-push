@@ -71,6 +71,9 @@ zoo project의 client push 역할을 담당한다.
        └─src/test/resources  
 ```
 
+## Documentation
+- [Client Push 분석](https://www.notion.so/barogohq/Client-Push-478e2db809e2497590ba135e3af0a81d)
+
 ## Setup
 
 > docker-compose 부분은 추후, root docker-compse와 통합하여 관리예정 
