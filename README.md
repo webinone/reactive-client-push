@@ -9,14 +9,14 @@ zoo project의 client push 역할을 담당한다.
 
 - **[Documentation](#Documentation)**
 
-- **[Requirements and Downloads](#Requirements-and-Downloads)**
+- **[Setup](#Setup)**
 
-- **[Running Zoo](#Running-Zoo)**
+- **[Running Client Push Server](#Running-Client-Push-Server)**
 
 - **[배포 CI/CD](#배포-CI/CD)**
 
 ## Features
-`라이더앱`, `컨트롤룸`, `관제` 등에 `라이더 위치정보`,`주문정보등록/변경`,`공유정보`,`사용자/허브설정정보` 등을 push 정보 한다. 
+`라이더앱`, `컨트롤룸`, `관제` 등에 `라이더 위치정보`,`주문정보등록/변경`,`공유정보`,`사용자/허브설정정보` 등을 push 한다.
 
 ### Skill
 * spring webflux
